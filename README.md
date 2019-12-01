@@ -1,6 +1,6 @@
 # Advent of Code
 
-A Repo with all my solutions I create for  [Advent of Code](https://adventofcode.com/).
+A Repo with all my solutions for [Advent of Code](https://adventofcode.com/).
 Instead of having a repo for each year, I will gather everything in this one.
 
 ## 2019
