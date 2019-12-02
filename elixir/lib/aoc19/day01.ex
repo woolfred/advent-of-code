@@ -9,7 +9,7 @@ defmodule AoC19.Day01 do
     |> fuel_for()
   end
 
-  def fuel_for_list(mass, fuel_calc_fun) when is_binary(mass) do
+  def calc_fuel_sum(mass, fuel_calc_fun) when is_binary(mass) do
     mass
     |> String.split("\n", trim: true)
     |> Enum.reduce(0, fn mass, acc -> acc + fuel_calc_fun.(mass) end)

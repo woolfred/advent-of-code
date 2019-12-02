@@ -22,7 +22,7 @@ defmodule AoC19.Day01Test do
 
   test "Part A" do
     File.read!("../input/2019/day01.txt")
-    |> Day01.fuel_for_list(&Day01.fuel_for/1)
+    |> Day01.calc_fuel_sum(&Day01.fuel_for/1)
     |> IO.inspect(label: " Day01a")
   end
 
@@ -40,7 +40,7 @@ defmodule AoC19.Day01Test do
 
   test "Part B" do
     File.read!("../input/2019/day01.txt")
-    |> Day01.fuel_for_list(&Day01.all_fuel_for/1)
+    |> Day01.calc_fuel(&Day01.all_fuel_for/1)
     |> IO.inspect(label: " Day01b")
   end
 end
