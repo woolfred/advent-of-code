@@ -1,25 +1,23 @@
 defmodule AoC22.Day01 do
   def most_calories(input) do
-    input
-    |> String.split("\n")
-    |> Enum.reduce({0, 0}, fn
-      "", {current, highest} -> if current > highest, do: {0, current}, else: {0, highest}
-      value, {current, highest} -> {current + String.to_integer(value), highest}
-    end)
+    elves_sorted_by_calories(input)
+    |> hd()
   end
 
-  def top3_calories(input) do
-    {_, elves} =
-      input
-      |> String.split("\n")
-      |> Enum.reduce({0, []}, fn
-        "", {current, elves} -> {0, [current | elves]}
-        value, {current, elves} -> {current + String.to_integer(value), elves}
-      end)
-
-    elves
-    |> Enum.sort(:desc)
+  def top3_calories_summed(input) do
+    elves_sorted_by_calories(input)
     |> Enum.take(3)
     |> Enum.sum()
+  end
+
+  defp elves_sorted_by_calories(input, order \\ :desc) do
+    input
+    |> String.split("\n")
+    |> Enum.reduce({0, []}, fn
+      "", {calories, elves} -> {0, [calories | elves]}
+      value, {calories, elves} -> {calories + String.to_integer(value), elves}
+    end)
+    |> elem(1)
+    |> Enum.sort(order)
   end
 end
