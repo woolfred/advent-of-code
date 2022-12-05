@@ -1,18 +1,18 @@
 defmodule AoC22.Day05 do
-  def part(input, fun) do
+  def part_a(input), do: part(input, &Enum.reverse/1)
+  def part_b(input), do: part(input, & &1)
+
+  defp part(input, pick) do
     {crates, commands} = to_creates_and_commands(input)
 
     Enum.reduce(commands, crates, fn [amount, from, to], crates ->
       {taken, remaining} = Enum.split(crates[from], amount)
 
       Map.put(crates, from, remaining)
-      |> Map.put(to, fun.(taken) ++ crates[to])
+      |> Map.put(to, pick.(taken) ++ crates[to])
     end)
     |> top_crates()
   end
-
-  def part_a(input), do: part(input, &Enum.reverse/1)
-  def part_b(input), do: part(input, & &1)
 
   defp to_creates_and_commands(input) do
     [crates, commands] = String.split(input, "\n\n")
