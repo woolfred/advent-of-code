@@ -27,12 +27,11 @@ defmodule AoC22.Day05 do
       String.graphemes(row)
       |> Enum.drop_every(2)
       |> Enum.with_index()
-      |> dbg()
       |> Enum.filter(fn {crate, _} -> Regex.match?(~r/[A-Z]/, crate) end)
     end)
     |> Enum.reverse()
     |> Enum.reduce(%{}, fn {crate, col}, cratesmap ->
-      Map.update(cratesmap, to_string(div(col, 2) + 1), [crate], fn existing ->
+      Map.update(cratesmap, div(col, 2) + 1, [crate], fn existing ->
         [crate | existing]
       end)
     end)
@@ -43,7 +42,8 @@ defmodule AoC22.Day05 do
     |> String.split("\n", trim: true)
     |> Enum.map(fn command ->
       [_move, amount, _from, from, _to, to] = String.split(command)
-      [String.to_integer(amount), from, to]
+
+      Enum.map([amount, from, to], &String.to_integer/1)
     end)
   end
 
